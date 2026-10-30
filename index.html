@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Thaiana · Storymaker e editora de vídeo</title>
+<meta name="description" content="Portfólio de Thaiana, storymaker e editora de vídeo. Documentário, vlog e vídeos dark. Rio de Janeiro e Belo Horizonte.">
+<meta name="theme-color" content="#1F1E1D">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Thaiana · Storymaker e editora de vídeo">
+<meta property="og:description" content="Documentário, vlog e vídeos dark. Disponível para edição.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%231F1E1D'/%3E%3Cpath d='M12 9v14l11-7z' fill='%23C2A27C'/%3E%3C/svg%3E">
+<style>
+:root { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
+img { max-width: 100%; }
+[hidden] { display: none !important; }
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Layout: coluna central de 1120px, seções empilhadas com muito respiro; os vídeos trazem a cor, o site é a moldura. */
+:root {
+  --fundo: #1F1E1D;
+  --cartao: #2A2826;
+  --superficie: #34312E;
+  --borda: #4A4540;
+  --titulo: #F2EDE4;
+  --texto: #D9D3C9;
+  --destaque: #C2A27C;
+  --destaque-hover: #D4B892;
+  --fonte-titulo: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --fonte-texto: 'Montserrat', Arial, Helvetica, sans-serif;
+  --gutter: 32px;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+
+body {
+  margin: 0;
+  background-color: var(--fundo);
+  background-image: radial-gradient(ellipse at 15% 0%, rgba(194,162,124,0.10), transparent 55%);
+  background-repeat: no-repeat;
+  color: var(--texto);
+  font-family: var(--fonte-texto);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Granulado fino, como textura de filme */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 100;
+  opacity: 0.10;
+  mix-blend-mode: screen;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%' height='100%' filter='url(%23g)'/></svg>");
+}
+
+/* faixa da área segura acima do cabeçalho fixo */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0 0 auto;
+  height: env(safe-area-inset-top, 0px);
+  z-index: 60;
+  background: var(--fundo);
+}
+
+h1, h2, h3 {
+  font-family: var(--fonte-titulo);
+  font-weight: 500;
+  color: var(--titulo);
+  margin: 0;
+  text-wrap: balance;
+  line-height: 1.2;
+}
+
+a { color: var(--destaque); text-decoration: none; transition: color .2s ease; }
+a:hover { color: var(--titulo); }
+
+:focus-visible { outline: 2px solid var(--destaque); outline-offset: 3px; }
+
+.wrap {
+  max-width: calc(1120px + var(--gutter) * 2);
+  margin: 0 auto;
+  padding-left: max(var(--gutter), env(safe-area-inset-left, 0px));
+  padding-right: max(var(--gutter), env(safe-area-inset-right, 0px));
+}
+
+/* ---------- Cabeçalho ---------- */
+.topo {
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+  z-index: 50;
+  background: rgba(31,30,29,0.88);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid transparent;
+  transition: border-color .3s ease;
+}
+.topo.rolou { border-bottom-color: var(--superficie); }
+.topo .wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding-block: 16px;
+}
+.marca {
+  font-family: var(--fonte-titulo);
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--titulo);
+  letter-spacing: 0.01em;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}
+.marca:hover { color: var(--destaque); }
+
+.menu { display: flex; gap: 4px; list-style: none; margin: 0; padding: 0; }
+.menu a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 14px;
+  border-radius: 2px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--texto);
+  transition: background-color .2s ease, color .2s ease;
+}
+.menu a:hover { background: var(--superficie); color: var(--titulo); }
+.menu a.ativo { background: var(--titulo); color: var(--fundo); }
+
+.botao-menu {
+  display: none;
+  width: 44px; height: 44px;
+  background: transparent;
+  border: 1px solid var(--borda);
+  border-radius: 2px;
+  color: var(--titulo);
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  transition: border-color .2s ease, color .2s ease;
+}
+.botao-menu:hover { border-color: var(--destaque); color: var(--destaque); }
+.botao-menu svg { width: 20px; height: 20px; }
+
+/* ---------- Elementos comuns ---------- */
+.etiqueta {
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--destaque);
+  margin: 0 0 16px;
+}
+.secao { padding-block: 96px; }
+.cabeca-secao { margin-bottom: 48px; }
+.cabeca-secao h2 { font-size: 36px; }
+.cabeca-secao h2::after {
+  content: '';
+  display: block;
+  width: 48px;
+  height: 2px;
+  background: var(--destaque);
+  margin-top: 20px;
+}
+.cabeca-secao p { max-width: 60ch; margin: 20px 0 0; font-size: 16px; }
+
+/* Botões */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 48px;
+  padding: 0 28px;
+  border-radius: 2px;
+  font-family: var(--fonte-texto);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: background-color .25s ease, color .25s ease, border-color .25s ease, transform .25s ease;
+}
+.btn svg { width: 16px; height: 16px; transition: transform .25s ease; }
+.btn-principal { background: var(--destaque); color: var(--fundo); border: 1px solid var(--destaque); }
+.btn-principal:hover { background: var(--titulo); border-color: var(--titulo); color: var(--fundo); }
+.btn-principal:hover svg { transform: translateX(3px); }
+.btn-secundario { background: transparent; color: var(--destaque); border: 1px solid var(--destaque); }
+.btn-secundario:hover { background: var(--destaque); color: var(--fundo); }
+.btn:active { transform: translateY(1px); }
+
+/* ---------- Início ---------- */
+.inicio { padding-block: 112px 104px; }
+.inicio h1 {
+  font-size: clamp(40px, 6.4vw, 68px);
+  max-width: 15ch;
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+}
+.inicio h1 em { font-style: italic; color: var(--destaque); font-weight: 400; }
+.inicio .intro {
+  max-width: 52ch;
+  font-size: 18px;
+  margin: 28px 0 40px;
+}
+.acoes { display: flex; flex-wrap: wrap; gap: 16px; }
+
+.timecode {
+  margin-top: 72px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 32px;
+  font-size: 13px;
+  color: var(--texto);
+  font-variant-numeric: tabular-nums;
+  border-top: 1px solid var(--superficie);
+  padding-top: 20px;
+}
+.timecode span b { color: var(--destaque); font-weight: 600; letter-spacing: 0.08em; margin-right: 8px; }
+
+/* ---------- Grades de vídeo ---------- */
+.grade { display: grid; gap: 24px; }
+.grade-longos { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.grade-shorts { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+.video {
+  display: flex;
+  flex-direction: column;
+  background: var(--cartao);
+  border-radius: 4px;
+  overflow: hidden;
+  color: var(--texto);
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+.video:hover { color: var(--texto); transform: translateY(-4px); box-shadow: 0 14px 32px rgba(0,0,0,0.35); }
+
+.quadro {
+  position: relative;
+  background: var(--superficie);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  max-width: 100%;
+}
+.grade-longos .quadro { aspect-ratio: 16 / 9; }
+.grade-shorts .quadro { aspect-ratio: 9 / 16; }
+.capa {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .5s ease, filter .3s ease;
+  filter: brightness(.82);
+}
+.video:hover .capa { transform: scale(1.04); filter: brightness(.65); }
+.quadro::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(194,162,124,0.08), transparent 70%);
+  opacity: 0;
+  transition: opacity .3s ease;
+}
+.video:hover .quadro::before { opacity: 1; }
+.play {
+  position: relative;
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  border: 1px solid var(--destaque);
+  display: grid;
+  place-items: center;
+  color: var(--destaque);
+  transition: background-color .3s ease, color .3s ease, transform .3s ease;
+}
+.play svg { width: 18px; height: 18px; margin-left: 3px; }
+.video:hover .play { background: var(--destaque); color: var(--fundo); transform: scale(1.06); }
+.duracao {
+  position: absolute;
+  right: 10px; bottom: 10px;
+  font-size: 12px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  background: rgba(31,30,29,0.85);
+  color: var(--titulo);
+  padding: 2px 8px;
+  border-radius: 2px;
+}
+.info { padding: 20px 22px 24px; display: flex; flex-direction: column; gap: 6px; }
+.info h3 { font-size: 21px; transition: color .25s ease; }
+.video:hover .info h3 { color: var(--destaque); }
+.info p { margin: 0; font-size: 14px; }
+.grade-shorts .info { padding: 16px 18px 20px; }
+.grade-shorts .info h3 { font-size: 18px; }
+
+/* ---------- Meu perfil ---------- */
+.perfil-faixa { background: var(--cartao); }
+.perfil {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  gap: 64px;
+  align-items: start;
+}
+.perfil-texto p { margin: 0 0 20px; font-size: 17px; max-width: 58ch; }
+.perfil-esquerda { display: flex; flex-direction: column; gap: 40px; min-width: 0; }
+.fichas { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.foto-perfil { margin: 0; position: sticky; top: 112px; }
+.foto-perfil img, .foto-vazia {
+  height: auto;
+  object-position: center 20%;
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  aspect-ratio: 4 / 5;
+  border-radius: 4px;
+  object-fit: cover;
+}
+.foto-vazia {
+  background: var(--superficie);
+  border: 1px dashed var(--borda);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  color: var(--destaque);
+}
+.foto-vazia svg { width: 64px; height: 64px; }
+.foto-vazia span { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.18em; color: var(--texto); }
+.ficha {
+  background: var(--fundo);
+  border-radius: 4px;
+  padding: 24px;
+  border: 1px solid transparent;
+  transition: border-color .25s ease;
+}
+.ficha:hover { border-color: var(--borda); }
+.ficha .etiqueta { margin-bottom: 8px; font-size: 12px; }
+.ficha strong {
+  display: block;
+  font-family: var(--fonte-titulo);
+  font-weight: 500;
+  font-size: 26px;
+  color: var(--titulo);
+  line-height: 1.25;
+}
+.ferramentas-titulo { margin-top: 40px; }
+.ferramentas { display: flex; flex-wrap: wrap; gap: 10px; list-style: none; margin: 0; padding: 0; }
+.ferramentas li {
+  border: 1px solid var(--borda);
+  border-radius: 2px;
+  padding: 6px 14px;
+  font-size: 14px;
+  color: var(--texto);
+  transition: border-color .2s ease, color .2s ease;
+}
+.ferramentas li:hover { border-color: var(--destaque); color: var(--destaque); }
+
+/* ---------- Canais ---------- */
+.canais { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.canal {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  background: var(--cartao);
+  border: 1px solid transparent;
+  border-radius: 4px;
+  padding: 24px;
+  color: var(--texto);
+  transition: border-color .25s ease, transform .25s ease, background-color .25s ease;
+}
+.canal:hover { border-color: var(--destaque); background: var(--superficie); transform: translateY(-3px); color: var(--texto); }
+.avatar {
+  position: relative;
+  flex: 0 0 auto;
+  width: 72px; height: 72px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--superficie);
+  border: 1px solid var(--borda);
+  display: grid;
+  place-items: center;
+  transition: border-color .25s ease;
+}
+.canal:hover .avatar { border-color: var(--destaque); }
+.avatar img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.iniciais { font-family: var(--fonte-titulo); font-size: 22px; color: var(--destaque); }
+.canal-info { min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+.canal-info h3 { font-size: 20px; overflow-wrap: anywhere; transition: color .25s ease; }
+.canal:hover .canal-info h3 { color: var(--destaque); }
+.canal-info span { font-size: 14px; font-variant-numeric: tabular-nums; }
+.seta { position: absolute; top: 16px; right: 16px; width: 16px; height: 16px; color: var(--borda); transition: color .25s ease; }
+.canal:hover .seta { color: var(--destaque); }
+
+/* ---------- Contato ---------- */
+.contatos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.contato {
+  background: var(--cartao);
+  border-radius: 4px;
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  color: var(--texto);
+  border: 1px solid transparent;
+  transition: border-color .25s ease, transform .25s ease, background-color .25s ease;
+}
+.contato svg { width: 32px; height: 32px; color: var(--destaque); transition: color .25s ease; }
+.contato h3 { font-size: 20px; }
+.contato span { font-size: 14px; overflow-wrap: anywhere; }
+.contato:hover { border-color: var(--destaque); transform: translateY(-3px); color: var(--texto); background: var(--superficie); }
+.contato:hover svg { color: var(--titulo); }
+
+/* ---------- Rodapé ---------- */
+.rodape { border-top: 1px solid var(--superficie); }
+.rodape .wrap {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding-block: 32px;
+  padding-bottom: max(32px, env(safe-area-inset-bottom, 0px));
+  font-size: 14px;
+}
+.rodape p { margin: 0; }
+.voltar { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; }
+.voltar svg { width: 14px; height: 14px; transition: transform .2s ease; }
+.voltar:hover svg { transform: translateY(-3px); }
+
+/* ---------- Entrada suave (a partir de estado visível) ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  .surge { animation: surge .8s ease both; }
+  .surge.d1 { animation-delay: .08s; }
+  .surge.d2 { animation-delay: .16s; }
+  .surge.d3 { animation-delay: .24s; }
+  @keyframes surge { from { opacity: .001; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+  html { scroll-behavior: auto; }
+}
+
+/* ---------- Responsivo ---------- */
+@media (max-width: 1000px) {
+  .grade-longos { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .grade-shorts { gap: 16px; }
+  .canais { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .perfil { grid-template-columns: minmax(0, 1fr); gap: 48px; }
+  .foto-perfil { position: static; max-width: 420px; order: -1; }
+}
+@media (max-width: 820px) {
+  :root { --gutter: 20px; }
+  .botao-menu { display: inline-flex; }
+  .menu {
+    position: absolute;
+    top: 100%;
+    left: 0; right: 0;
+    flex-direction: column;
+    gap: 2px;
+    background: var(--fundo);
+    border-bottom: 1px solid var(--superficie);
+    padding: 8px max(var(--gutter), env(safe-area-inset-right, 0px)) 16px max(var(--gutter), env(safe-area-inset-left, 0px));
+  }
+  .menu:not(.aberto) { display: none; }
+  .menu a { width: 100%; font-size: 15px; }
+  .secao { padding-block: 80px; }
+  .inicio { padding-block: 72px 80px; }
+}
+@media (max-width: 600px) {
+  :root { --gutter: 16px; }
+  .grade-longos { grid-template-columns: minmax(0, 1fr); }
+  .grade-shorts { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+  .grade-shorts .info h3 { font-size: 16px; }
+  .contatos, .fichas, .canais { grid-template-columns: minmax(0, 1fr); }
+  .cabeca-secao h2 { font-size: 30px; }
+  .acoes .btn { flex: 1 1 100%; }
+  .ficha strong { font-size: 24px; }
+}
+</style>
+</head>
+<body>
+<header class="topo" id="topo">
+  <div class="wrap">
+    <a href="#inicio" class="marca">Thaiana</a>
+    <button class="botao-menu" id="botao-menu" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <nav aria-label="Principal">
+      <ul class="menu" id="menu">
+        <li><a href="#inicio" data-alvo="inicio" class="ativo">Início</a></li>
+        <li><a href="#projetos" data-alvo="projetos">Projetos</a></li>
+        <li><a href="#shorts" data-alvo="shorts">Shorts</a></li>
+        <li><a href="#canais" data-alvo="canais">Canais</a></li>
+        <li><a href="#perfil" data-alvo="perfil">Meu perfil</a></li>
+        <li><a href="#contato" data-alvo="contato">Contato</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- Início -->
+  <section class="inicio" id="inicio">
+    <div class="wrap">
+      <p class="etiqueta surge">Storymaker · Editora de vídeo</p>
+      <h1 class="surge d1">Histórias que prendem do <em>primeiro corte</em> ao último frame.</h1>
+      <p class="intro surge d2">Edito vídeos longos e conteúdos curtos com ritmo, cuidado e prazo cumprido.</p>
+      <div class="acoes surge d3">
+        <a href="#projetos" class="btn btn-principal">Ver projetos
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+        </a>
+        <a href="#contato" class="btn btn-secundario">Fale comigo</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projetos -->
+  <section class="secao" id="projetos">
+    <div class="wrap">
+      <div class="cabeca-secao">
+        <p class="etiqueta">Vídeos longos</p>
+        <h2>Projetos</h2>
+      </div>
+      <div class="grade grade-longos">
+        <a class="video" href="https://www.youtube.com/watch?v=QYd83PaRnEo" target="_blank" rel="noopener" aria-label="Assistir Projeto 01 no YouTube">
+          <div class="quadro"><img class="capa" src="https://i.ytimg.com/vi/QYd83PaRnEo/hqdefault.jpg" alt="" loading="lazy"><span class="play"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M4 2.5v11l9-5.5z"/></svg></span></div>
+        </a>
+        <a class="video" href="https://www.youtube.com/watch?v=XYGNZTg4JyI" target="_blank" rel="noopener" aria-label="Assistir Projeto 02 no YouTube">
+          <div class="quadro"><img class="capa" src="https://i.ytimg.com/vi/XYGNZTg4JyI/hqdefault.jpg" alt="" loading="lazy"><span class="play"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M4 2.5v11l9-5.5z"/></svg></span></div>
+        </a>
+        <a class="video" href="https://www.youtube.com/watch?v=nwpoox8MNlY" target="_blank" rel="noopener" aria-label="Assistir Projeto 03 no YouTube">
+          <div class="quadro"><img class="capa" src="https://i.ytimg.com/vi/nwpoox8MNlY/hqdefault.jpg" alt="" loading="lazy"><span class="play"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M4 2.5v11l9-5.5z"/></svg></span></div>
+        </a>
+        <a class="video" href="https://www.youtube.com/watch?v=ITUPpiplOlQ" target="_blank" rel="noopener" aria-label="Assistir Projeto 04 no YouTube">
+          <div class="quadro"><img class="capa" src="https://i.ytimg.com/vi/ITUPpiplOlQ/hqdefault.jpg" alt="" loading="lazy"><span class="play"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M4 2.5v11l9-5.5z"/></svg></span></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Shorts -->
+  <section class="secao" id="shorts">
+    <div class="wrap">
+      <div class="cabeca-secao">
+        <p class="etiqueta">Reels e vídeos curtos</p>
+        <h2>Shorts</h2>
+      </div>
+      <div class="grade grade-shorts">
+        <a class="video" href="https://youtube.com/shorts/BgzwzhMawMc" target="_blank" rel="noopener" aria-label="Assistir Marca Pessoal no YouTube">
+          <div class="quadro"><img class="capa" src="https://i.ytimg.com/vi/BgzwzhMawMc/hqdefault.jpg" alt="" loading="lazy"><span class="play"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M4 2.5v11l9-5.5z"/></svg></span><span class="duracao">Short 01</span></div>
+          <div class="info"><h3>Marca Pessoal</h3></div>
+        </a>
+        <a class="video" href="https://youtube.com/shorts/ptT_ABPfFbg" target="_blank" rel="noopener" aria-label="Assistir Ensaio de Casal no YouTube">
+          <div class="quadro"><img class="capa" src="https://i.ytimg.com/vi/ptT_ABPfFbg/hqdefault.jpg" alt="" loading="lazy"><span class="play"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M4 2.5v11l9-5.5z"/></svg></span><span class="duracao">Short 02</span></div>
+          <div class="info"><h3>Ensaio de Casal</h3></div>
+        </a>
+        <a class="video" href="https://youtube.com/shorts/kO-P049IAls" target="_blank" rel="noopener" aria-label="Assistir Casamento no YouTube">
+          <div class="quadro"><img class="capa" src="https://i.ytimg.com/vi/kO-P049IAls/hqdefault.jpg" alt="" loading="lazy"><span class="play"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M4 2.5v11l9-5.5z"/></svg></span><span class="duracao">Short 03</span></div>
+          <div class="info"><h3>Casamento</h3></div>
+        </a>
+        <a class="video" href="https://youtube.com/shorts/jHvY0EteCZ4" target="_blank" rel="noopener" aria-label="Assistir Ensaio Revelação no YouTube">
+          <div class="quadro"><img class="capa" src="https://i.ytimg.com/vi/jHvY0EteCZ4/hqdefault.jpg" alt="" loading="lazy"><span class="play"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M4 2.5v11l9-5.5z"/></svg></span><span class="duracao">Short 04</span></div>
+          <div class="info"><h3>Ensaio Revelação</h3></div>
+        </a>
+        <a class="video" href="https://youtube.com/shorts/yJnOgFRnsv0" target="_blank" rel="noopener" aria-label="Assistir Chá de Bebê no YouTube">
+          <div class="quadro"><img class="capa" src="https://i.ytimg.com/vi/yJnOgFRnsv0/hqdefault.jpg" alt="" loading="lazy"><span class="play"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M4 2.5v11l9-5.5z"/></svg></span><span class="duracao">Short 05</span></div>
+          <div class="info"><h3>Chá de Bebê</h3></div>
+        </a>
+        <a class="video" href="https://youtube.com/shorts/v4k9TdUBPPA" target="_blank" rel="noopener" aria-label="Assistir Ensaio de Gestante no YouTube">
+          <div class="quadro"><img class="capa" src="https://i.ytimg.com/vi/v4k9TdUBPPA/hqdefault.jpg" alt="" loading="lazy"><span class="play"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M4 2.5v11l9-5.5z"/></svg></span><span class="duracao">Short 06</span></div>
+          <div class="info"><h3>Ensaio de Gestante</h3></div>
+        </a>
+        <a class="video" href="https://youtube.com/shorts/suYf-mIkOvM" target="_blank" rel="noopener" aria-label="Assistir Parto no YouTube">
+          <div class="quadro"><img class="capa" src="https://i.ytimg.com/vi/suYf-mIkOvM/hqdefault.jpg" alt="" loading="lazy"><span class="play"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M4 2.5v11l9-5.5z"/></svg></span><span class="duracao">Short 07</span></div>
+          <div class="info"><h3>Parto</h3></div>
+        </a>
+        <a class="video" href="https://youtube.com/shorts/6THh51uG48Y" target="_blank" rel="noopener" aria-label="Assistir Festa Infantil no YouTube">
+          <div class="quadro"><img class="capa" src="https://i.ytimg.com/vi/6THh51uG48Y/hqdefault.jpg" alt="" loading="lazy"><span class="play"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M4 2.5v11l9-5.5z"/></svg></span><span class="duracao">Short 08</span></div>
+          <div class="info"><h3>Festa Infantil</h3></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Canais -->
+  <section class="secao" id="canais">
+    <div class="wrap">
+      <div class="cabeca-secao">
+        <p class="etiqueta">Parcerias</p>
+        <h2>Canais que já trabalhei</h2>
+      </div>
+      <div class="canais">
+        <a class="canal" href="https://www.youtube.com/@INACREDITAVELBR" target="_blank" rel="noopener">
+          <span class="avatar"><span class="iniciais" aria-hidden="true">IN</span><img src="https://yt3.googleusercontent.com/FrrLZShpznAlijKpG1fvb3BnyCIucPueiBTWVehXNeQU71gQdZ2yb7ZpZFv1WNdWllzoA6KvhKY=s176-c-k-c0x00ffffff-no-rj" alt="Foto do canal INACREDITÁVEL" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()"></span>
+          <div class="canal-info"><h3>INACREDITÁVEL</h3><span>131 mil inscritos</span></div>
+          <svg class="seta" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 11L11 5M6 5h5v5"/></svg>
+        </a>
+        <a class="canal" href="https://www.youtube.com/@SimplifiquecomDaniBrito" target="_blank" rel="noopener">
+          <span class="avatar"><span class="iniciais" aria-hidden="true">SD</span><img src="https://yt3.googleusercontent.com/mR5Cvg85Tn1ii7qWvocVqV9wm2oJjNTMxnEniFRUjh_VdWAmNfwzQH_t3KP8iEhhgf8XgOmV=s176-c-k-c0x00ffffff-no-rj" alt="Foto do canal Simplifique com Dani Brito" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()"></span>
+          <div class="canal-info"><h3>Simplifique com Dani Brito</h3><span>307 mil inscritos</span></div>
+          <svg class="seta" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 11L11 5M6 5h5v5"/></svg>
+        </a>
+        <a class="canal" href="https://www.youtube.com/@canalcozinhavlog" target="_blank" rel="noopener">
+          <span class="avatar"><span class="iniciais" aria-hidden="true">CV</span><img src="https://yt3.googleusercontent.com/0zIOVmFll_kljkv4YN994pDJYWNWzdzxDSJL7GyEgbyjsTujyw1XCZjfJ0PWgDlIP2OCfJBAFfE=s176-c-k-c0x00ffffff-no-rj" alt="Foto do canal Cozinha Vlog por Dani Brito" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()"></span>
+          <div class="canal-info"><h3>Cozinha Vlog por Dani Brito</h3><span>31,9 mil inscritos</span></div>
+          <svg class="seta" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 11L11 5M6 5h5v5"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Meu perfil -->
+  <section class="secao perfil-faixa" id="perfil">
+    <div class="wrap">
+      <div class="cabeca-secao">
+        <p class="etiqueta">Quem edita</p>
+        <h2>Meu perfil</h2>
+      </div>
+      <div class="perfil">
+        <div class="perfil-esquerda">
+          <div class="perfil-texto">
+          <p>Sou storymaker e editora de vídeo. Meu trabalho começa antes da timeline: entender o que a história precisa dizer e qual emoção o público deve levar para casa. Daí vêm o ritmo, os cortes e a trilha.</p>
+          <p>Trabalho com canais, marcas e criadores que valorizam organização e comunicação clara. Entrego no prazo, com versões de revisão bem definidas e arquivos prontos para cada plataforma.</p>
+          <p class="etiqueta ferramentas-titulo">Ferramentas</p>
+          <ul class="ferramentas">
+            <li>Premiere Pro</li>
+            <li>DaVinci Resolve</li>
+            <li>CapCut</li>
+          </ul>
+          </div>
+          <div class="fichas">
+            <div class="ficha"><p class="etiqueta">Experiência</p><strong>+3 anos</strong></div>
+            <div class="ficha"><p class="etiqueta">Nicho</p><strong>Documentário, vlog e vídeos dark</strong></div>
+            <div class="ficha"><p class="etiqueta">Status</p><strong>Disponível para edição</strong></div>
+            <div class="ficha"><p class="etiqueta">Cidade</p><strong>Rio de Janeiro e Belo Horizonte</strong></div>
+          </div>
+        </div>
+        <figure class="foto-perfil">
+          <img src="img/foto.jpg" alt="Thaiana, storymaker e editora de vídeo" width="800" height="1000">
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contato -->
+  <section class="secao" id="contato">
+    <div class="wrap">
+      <div class="cabeca-secao">
+        <p class="etiqueta">Contato</p>
+        <h2>Vamos conversar?</h2>
+        <p>Conte sobre o seu projeto pelo canal que preferir. Respondo em até um dia útil.</p>
+      </div>
+      <div class="contatos">
+        <a class="contato" href="https://www.instagram.com/thaianafotografia/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.8" fill="currentColor"/></svg>
+          <div><h3>Instagram</h3><span>@thaianafotografia</span></div>
+        </a>
+        <a class="contato" href="https://x.com/thai_santannaa" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.8 3h3.1l-6.8 7.8 8 10.2h-6.3l-4.9-6.4L5.3 21H2.2l7.3-8.3L1.9 3h6.4l4.4 5.9zm-1.1 16.2h1.7L7.4 4.7H5.6z"/></svg>
+          <div><h3>Twitter</h3><span>@thai_santannaa</span></div>
+        </a>
+        <a class="contato" href="https://wa.me/5521984200737" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M3.5 20.5l1.3-4.2A8.5 8.5 0 1 1 8 19.4z"/><path d="M9 8.5c0 3.5 3 6.5 6.5 6.5l1-1.6-2-1-1 .9c-1-.4-2-1.4-2.4-2.4l.9-1-1-2z" fill="currentColor" stroke="none"/></svg>
+          <div><h3>WhatsApp</h3><span>(21) 98420-0737</span></div>
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="rodape">
+  <div class="wrap">
+    <p>© 2026 Thaiana. Todos os direitos reservados.</p>
+    <a href="#inicio" class="voltar">Voltar ao topo
+      <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 12V2M3 6l4-4 4 4"/></svg>
+    </a>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var topo = document.getElementById('topo');
+  var botao = document.getElementById('botao-menu');
+  var menu = document.getElementById('menu');
+  var links = Array.prototype.slice.call(menu.querySelectorAll('a'));
+
+  // borda do cabeçalho ao rolar
+  function aoRolar() { topo.classList.toggle('rolou', window.scrollY > 8); }
+  window.addEventListener('scroll', aoRolar, { passive: true });
+  aoRolar();
+
+  // menu do celular
+  function fechar() { menu.classList.remove('aberto'); botao.setAttribute('aria-expanded', 'false'); botao.setAttribute('aria-label', 'Abrir menu'); }
+  botao.addEventListener('click', function () {
+    var aberto = menu.classList.toggle('aberto');
+    botao.setAttribute('aria-expanded', aberto ? 'true' : 'false');
+    botao.setAttribute('aria-label', aberto ? 'Fechar menu' : 'Abrir menu');
+  });
+  links.forEach(function (l) { l.addEventListener('click', fechar); });
+
+  // item ativo conforme a seção visível
+  function marcar(id) {
+    links.forEach(function (l) { l.classList.toggle('ativo', l.dataset.alvo === id); });
+  }
+  if ('IntersectionObserver' in window) {
+    var obs = new IntersectionObserver(function (entradas) {
+      entradas.forEach(function (e) { if (e.isIntersecting) marcar(e.target.id); });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    ['inicio', 'projetos', 'shorts', 'canais', 'perfil', 'contato'].forEach(function (id) {
+      var s = document.getElementById(id); if (s) obs.observe(s);
+    });
+  }
+})();
+</script>
+</body>
+</html>
